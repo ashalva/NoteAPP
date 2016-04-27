@@ -84,13 +84,11 @@ namespace NoteApp.Touch
 		{
 			Task.Run (() => {
 				var notes = _viewModel.GetNotes ();
-				if (notes != null) {
-					InvokeOnMainThread (() => {
-						_noteSource.SDSource = notes;
-						_notesTableView.ReloadData ();
-						_refresher.EndRefreshing ();
-					});
-				}
+				InvokeOnMainThread (() => {
+					_noteSource.SDSource = notes;
+					_notesTableView.ReloadData ();
+					_refresher.EndRefreshing ();
+				});
 			});
 		}
 

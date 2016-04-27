@@ -20,7 +20,8 @@ namespace NoteApp.Core.Services
 			string url = string.Format ("{0}getNotes", Constants.APIUrl);
 			var result = _apiProvider.GET<List<Note>> (url, null);
 
-			result = result.Reverse ();
+			if (result != null)
+				result.Reverse ();
 			return result;
 		}
 
