@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NoteApp.Touch", "NoteApp.Touch\NoteApp.Touch.csproj", "{F2B4A17D-A6A7-44D3-A02F-4A105BAA374D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NoteApp.Core", "NoteApp.Core\NoteApp.Core.csproj", "{E0825C15-0CB5-44B0-B9BE-44543D46D4F2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|iPhoneSimulator = Debug|iPhoneSimulator
+		Release|iPhone = Release|iPhone
+		Release|iPhoneSimulator = Release|iPhoneSimulator
+		Debug|iPhone = Debug|iPhone
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E0825C15-0CB5-44B0-B9BE-44543D46D4F2}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{E0825C15-0CB5-44B0-B9BE-44543D46D4F2}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{E0825C15-0CB5-44B0-B9BE-44543D46D4F2}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{E0825C15-0CB5-44B0-B9BE-44543D46D4F2}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{E0825C15-0CB5-44B0-B9BE-44543D46D4F2}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{E0825C15-0CB5-44B0-B9BE-44543D46D4F2}.Release|iPhone.Build.0 = Release|Any CPU
+		{E0825C15-0CB5-44B0-B9BE-44543D46D4F2}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{E0825C15-0CB5-44B0-B9BE-44543D46D4F2}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{F2B4A17D-A6A7-44D3-A02F-4A105BAA374D}.Debug|iPhone.ActiveCfg = Debug|iPhone
+		{F2B4A17D-A6A7-44D3-A02F-4A105BAA374D}.Debug|iPhone.Build.0 = Debug|iPhone
+		{F2B4A17D-A6A7-44D3-A02F-4A105BAA374D}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
+		{F2B4A17D-A6A7-44D3-A02F-4A105BAA374D}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
+		{F2B4A17D-A6A7-44D3-A02F-4A105BAA374D}.Release|iPhone.ActiveCfg = Release|iPhone
+		{F2B4A17D-A6A7-44D3-A02F-4A105BAA374D}.Release|iPhone.Build.0 = Release|iPhone
+		{F2B4A17D-A6A7-44D3-A02F-4A105BAA374D}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
+		{F2B4A17D-A6A7-44D3-A02F-4A105BAA374D}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
+	EndGlobalSection
+EndGlobal
