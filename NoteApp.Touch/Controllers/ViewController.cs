@@ -44,9 +44,9 @@ namespace NoteApp.Touch
 
 		private async void InitUI ()
 		{
-			nfloat startY = 0;//GetStatusBarHeight ();
+			nfloat startY = GetStatusBarHeight ();
 
-			_notesTableView = new UITableView (new CGRect (0, startY, View.Frame.Width, View.Frame.Height - startY));
+			_notesTableView = new UITableView (new CGRect (0, 0, View.Frame.Width, View.Frame.Height - startY));
 			_notesTableView.RowHeight = 70;
 
 			this.NavigationItem.SetRightBarButtonItem (

@@ -67,10 +67,11 @@ namespace NoteApp.Touch.Controllers
 		{
 			bool success = false;
 			await Task.Run (() => {
-				_viewModel.AddNote (name, body);
+				success = _viewModel.AddNote (name, body);
 			});
-			NavigationController.PopViewController (true);
-
+			if (success) {
+				NavigationController.PopViewController (true);
+			}
 			DialogHelper.DismissProgressDialog (_dialog);
 		}
 	}
