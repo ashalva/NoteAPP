@@ -28,19 +28,22 @@ namespace NoteApp.Touch.Controllers
 
 		private void InitUI ()
 		{
-			nfloat startY = 0; //GetStatusBarHeight ();
+			nfloat startY = GetStatusBarHeight ();
 
-			nfloat padding	= 15;
+			nfloat padding	= 10;
 			UITextField nameTextField = new UITextField ();
-			nameTextField.Frame = new CGRect (padding, startY + padding, View.Frame.Width - padding * 2, 40);
+			nameTextField.Frame = new CGRect (padding, padding, View.Frame.Width - padding * 2, 40);
 			nameTextField.Placeholder = "Name";
-
+			nameTextField.Layer.BorderWidth = 1f;
+			nameTextField.Layer.BorderColor = UIColor.LightGray.CGColor;
+			nameTextField.LeftViewMode = UITextFieldViewMode.Always;
+			nameTextField.LeftView = new UIView (new CGRect (0, 0, padding, 40));
 
 			UITextView bodyTextField = new UITextView ();
 			bodyTextField.Frame = new CGRect (padding, 
 				nameTextField.Frame.Bottom + padding,
 				View.Frame.Width - padding * 2, 
-				View.Frame.Height - (nameTextField.Frame.Bottom + padding * 2));
+				View.Frame.Height - (nameTextField.Frame.Bottom + padding * 2 + startY));
 			bodyTextField.Layer.BorderWidth = 1f;
 			bodyTextField.Layer.BorderColor = UIColor.LightGray.CGColor;
 
@@ -54,6 +57,7 @@ namespace NoteApp.Touch.Controllers
 						UIAlertController alertcontroller = new UIAlertController ();
 						alertcontroller.Message = "Please enter note Name and Body";
 						alertcontroller.Title = "Error";
+						alertcontroller.AddAction (UIAlertAction.Create ("OK", UIAlertActionStyle.Default, null));
 						PresentViewController (alertcontroller, true, null);
 					} else {
 						_dialog = DialogHelper.ShowProgressDialog (View.Frame, View);
