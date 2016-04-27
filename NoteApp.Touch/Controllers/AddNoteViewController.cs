@@ -24,7 +24,7 @@ namespace NoteApp.Touch.Controllers
 
 		private void InitUI ()
 		{
-			nfloat startY = 0;//GetStatusBarHeight ();
+			nfloat startY = 0; //GetStatusBarHeight ();
 
 			nfloat padding	= 15;
 			UITextField nameTextField = new UITextField ();
