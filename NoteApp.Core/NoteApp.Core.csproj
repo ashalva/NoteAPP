@@ -38,6 +38,7 @@
     <Compile Include="Services\INoteService.cs" />
     <Compile Include="BusinessObjects\Note.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="BusinessObjects\StatusCode.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>

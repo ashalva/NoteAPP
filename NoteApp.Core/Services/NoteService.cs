@@ -22,6 +22,18 @@ namespace NoteApp.Core.Services
 
 			return result;
 		}
+
+		public bool AddNote (string name, string body)
+		{
+			string url = string.Format ("{0}addNote?name={1}&body={2}",
+				             Constants.APIUrl, name, body);
+			var result = _apiProvider.GET<StatusCode> (url, null);
+
+			if (result.Status == 200)
+				return true;
+			
+			return false;
+		}
 	}
 }
 

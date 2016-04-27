@@ -15,8 +15,10 @@ namespace NoteApp.Touch
 	public partial class ViewController : BaseViewController
 	{
 		private NoteViewModel _viewModel;
-		private UITableView _notes;
+		private UITableView _notesTableView;
 		private UIActivityIndicatorView _dialog;
+		private UIRefreshControl _refresher;
+		private NotesTableSource _noteSource;
 
 		public ViewController () : base ()
 		{
@@ -43,15 +45,9 @@ namespace NoteApp.Touch
 		private async void InitUI ()
 		{
 			nfloat startY = 0;//GetStatusBarHeight ();
-			_notes = new UITableView (new CGRect (0, startY, View.Frame.Width, View.Frame.Height - startY));
-			_notes.RowHeight = 70;
-			List<Note> notes = null;
-			await Task.Run (() => {
-				notes = _viewModel.GetNotes ();
-			});
 
-			_notes.DataSource = new NotesTableSource (notes, View.Frame.Width, 70);
-			_notes.ReloadData ();
+			_notesTableView = new UITableView (new CGRect (0, startY, View.Frame.Width, View.Frame.Height - startY));
+			_notesTableView.RowHeight = 70;
 
 			this.NavigationItem.SetRightBarButtonItem (
 				new UIBarButtonItem (UIBarButtonSystemItem.Add, (sender, args) => {
@@ -60,9 +56,42 @@ namespace NoteApp.Touch
 				, true);
 
 
+			_refresher = new UIRefreshControl ();
+			_refresher.ValueChanged += Refresh;
 
-			View.AddSubview (_notes);
+			_notesTableView.AddSubview (_refresher);
+			View.AddSubview (_notesTableView);
 			DialogHelper.DismissProgressDialog (_dialog);
+		}
+
+		public async override void ViewWillAppear (bool animated)
+		{
+			base.ViewWillAppear (animated);
+
+			List<Note> notes = null;
+
+			await Task.Run (() => {
+				notes = _viewModel.GetNotes ();
+			});
+
+			_noteSource = new NotesTableSource (notes, View.Frame.Width, 70);
+			_notesTableView.DataSource = _noteSource;
+			_notesTableView.ReloadData ();
+
+		}
+
+		void Refresh (object sender, EventArgs e)
+		{
+			Task.Run (() => {
+				var notes = _viewModel.GetNotes ();
+				if (notes != null) {
+					InvokeOnMainThread (() => {
+						_noteSource.SDSource = notes;
+						_notesTableView.ReloadData ();
+						_refresher.EndRefreshing ();
+					});
+				}
+			});
 		}
 
 

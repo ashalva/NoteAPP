@@ -19,6 +19,11 @@ namespace NoteApp.Core.ViewModels
 		{
 			return _noteServices.GetNotes ();
 		}
+
+		public bool AddNote (string name, string body)
+		{
+			return _noteServices.AddNote (name, body);
+		}
 	}
 }
 
