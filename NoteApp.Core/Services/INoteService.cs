@@ -9,6 +9,8 @@ namespace NoteApp.Core.Services
 		List<Note> GetNotes ();
 
 		bool AddNote (string name, string body);
+
+		bool DeleteNote (string id);
 	}
 }
 

@@ -42,26 +42,34 @@ namespace NoteApp.Touch
 			InitUI ();
 		}
 
-		private async void InitUI ()
+		private void InitUI ()
 		{
 			nfloat startY = GetStatusBarHeight ();
 
 			_notesTableView = new UITableView (new CGRect (0, 0, View.Frame.Width, View.Frame.Height - startY));
 			_notesTableView.RowHeight = 70;
 
+			_noteSource = new NotesTableSource (null, View.Frame.Width, 70);
+			_noteSource.DeleteNote += DeleteNote;
 			this.NavigationItem.SetRightBarButtonItem (
 				new UIBarButtonItem (UIBarButtonSystemItem.Add, (sender, args) => {
 					NavigationController.PushViewController (new AddNoteViewController (_viewModel), false);
 				})
 				, true);
-
-
+			
 			_refresher = new UIRefreshControl ();
 			_refresher.ValueChanged += Refresh;
 
 			_notesTableView.AddSubview (_refresher);
 			View.AddSubview (_notesTableView);
 			DialogHelper.DismissProgressDialog (_dialog);
+		}
+
+		void DeleteNote (object sender, string e)
+		{
+			Task.Run (() => {
+				_viewModel.DeleteNote (e);
+			});
 		}
 
 		public async override void ViewWillAppear (bool animated)
@@ -73,9 +81,8 @@ namespace NoteApp.Touch
 			await Task.Run (() => {
 				notes = _viewModel.GetNotes ();
 			});
-
-			_noteSource = new NotesTableSource (notes, View.Frame.Width, 70);
-			_notesTableView.DataSource = _noteSource;
+			_noteSource.SDSource = notes;
+			_notesTableView.Source = _noteSource;
 			_notesTableView.ReloadData ();
 
 		}

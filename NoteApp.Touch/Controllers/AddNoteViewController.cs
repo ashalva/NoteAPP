@@ -54,7 +54,7 @@ namespace NoteApp.Touch.Controllers
 						UIAlertController alertcontroller = new UIAlertController ();
 						alertcontroller.Message = "Please enter note Name and Body";
 						alertcontroller.Title = "Error";
-						PresentViewController (this, true, null);
+						PresentViewController (alertcontroller, true, null);
 					} else {
 						_dialog = DialogHelper.ShowProgressDialog (View.Frame, View);
 						Addnote (nameTextField.Text, bodyTextField.Text);

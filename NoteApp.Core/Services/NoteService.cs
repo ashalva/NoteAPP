@@ -36,6 +36,18 @@ namespace NoteApp.Core.Services
 			
 			return false;
 		}
+
+		public bool DeleteNote (string id)
+		{
+			string url = string.Format ("{0}deleteNote?id={1}",
+				             Constants.APIUrl, id);
+			var result = _apiProvider.GET<StatusCode> (url, null);
+
+			if (result.Status == 200)
+				return true;
+
+			return false;
+		}
 	}
 }
 

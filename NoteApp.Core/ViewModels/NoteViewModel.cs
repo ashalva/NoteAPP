@@ -24,6 +24,11 @@ namespace NoteApp.Core.ViewModels
 		{
 			return _noteServices.AddNote (name, body);
 		}
+
+		public bool DeleteNote (string id)
+		{
+			return _noteServices.DeleteNote (id);
+		}
 	}
 }
 

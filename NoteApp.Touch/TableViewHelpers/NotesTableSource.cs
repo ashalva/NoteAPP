@@ -7,12 +7,14 @@ using Foundation;
 
 namespace NoteApp.Touch
 {
-	public class NotesTableSource : UITableViewDataSource
+	public class NotesTableSource : UITableViewSource
 	{
 		public List<Note> SDSource{ get; set; }
 
 		private NSString _cellIdentifier = new NSString ("NoteCell");
 		private nfloat _width, _height;
+
+		public event EventHandler<string> DeleteNote;
 
 		public NotesTableSource (List<Note> source, nfloat width, nfloat height)
 		{
@@ -41,6 +43,25 @@ namespace NoteApp.Touch
 				return 0;
 		}
 
+		public override void CommitEditingStyle (UITableView tableView, UITableViewCellEditingStyle editingStyle, Foundation.NSIndexPath indexPath)
+		{
+			switch (editingStyle) {
+			case UITableViewCellEditingStyle.Delete:
+				DeleteNote?.Invoke (this, SDSource [indexPath.Row].NoteId);
+				SDSource.RemoveAt (indexPath.Row);
+				tableView.DeleteRows (new NSIndexPath[] { indexPath }, UITableViewRowAnimation.Fade);
+
+				break;
+			case UITableViewCellEditingStyle.None:
+				Console.WriteLine ("CommitEditingStyle:None called");
+				break;
+			}
+		}
+
+		public override bool CanEditRow (UITableView tableView, NSIndexPath indexPath)
+		{
+			return true; 
+		}
 
 	}
 }
