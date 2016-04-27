@@ -105,6 +105,7 @@
     <Compile Include="Controllers\ViewController.cs" />
     <Compile Include="Controllers\AddNoteViewController.cs" />
     <Compile Include="Controllers\BaseViewController.cs" />
+    <Compile Include="Controllers\NoteDetailsViewController.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>

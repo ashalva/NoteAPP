@@ -48,6 +48,18 @@ namespace NoteApp.Core.Services
 
 			return false;
 		}
+
+		public bool UpdateNote (string id, string newName, string newBody)
+		{
+			string url = string.Format ("{0}updateNote?id={1}&name={2}&body={3}",
+				             Constants.APIUrl, id, newName, newBody);
+			var result = _apiProvider.GET<StatusCode> (url, null);
+
+			if (result.Status == 200)
+				return true;
+
+			return false;
+		}
 	}
 }
 

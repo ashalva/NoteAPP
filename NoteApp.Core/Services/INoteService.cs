@@ -11,6 +11,8 @@ namespace NoteApp.Core.Services
 		bool AddNote (string name, string body);
 
 		bool DeleteNote (string id);
+
+		bool UpdateNote (string id, string newName, string newBody);
 	}
 }
 

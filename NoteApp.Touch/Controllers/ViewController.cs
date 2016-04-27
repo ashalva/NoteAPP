@@ -51,6 +51,8 @@ namespace NoteApp.Touch
 
 			_noteSource = new NotesTableSource (null, View.Frame.Width, 70);
 			_noteSource.DeleteNote += DeleteNote;
+			_noteSource.NoteSelected += NoteSelected;
+
 			this.NavigationItem.SetRightBarButtonItem (
 				new UIBarButtonItem (UIBarButtonSystemItem.Add, (sender, args) => {
 					NavigationController.PushViewController (new AddNoteViewController (_viewModel), false);
@@ -63,6 +65,11 @@ namespace NoteApp.Touch
 			_notesTableView.AddSubview (_refresher);
 			View.AddSubview (_notesTableView);
 			DialogHelper.DismissProgressDialog (_dialog);
+		}
+
+		void NoteSelected (object sender, Note e)
+		{
+			NavigationController.PushViewController (new NoteDetailsViewController (_viewModel, e), false);
 		}
 
 		void DeleteNote (object sender, string e)

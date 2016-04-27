@@ -15,6 +15,7 @@ namespace NoteApp.Touch
 		private nfloat _width, _height;
 
 		public event EventHandler<string> DeleteNote;
+		public event EventHandler<Note> NoteSelected;
 
 		public NotesTableSource (List<Note> source, nfloat width, nfloat height)
 		{
@@ -23,6 +24,10 @@ namespace NoteApp.Touch
 			_height = height;
 		}
 
+		public override void RowSelected (UITableView tableView, NSIndexPath indexPath)
+		{
+			NoteSelected?.Invoke (this,	SDSource [indexPath.Row]);
+		}
 
 		public override UITableViewCell GetCell (UITableView tableView, Foundation.NSIndexPath indexPath)
 		{
