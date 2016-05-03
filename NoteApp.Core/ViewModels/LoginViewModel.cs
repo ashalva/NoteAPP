@@ -1,5 +1,6 @@
 ﻿using System;
 using NoteApp.Core.Services;
+using NoteApp.Core.DTO;
 
 namespace NoteApp.Core.ViewModels
 {
@@ -12,7 +13,7 @@ namespace NoteApp.Core.ViewModels
 			_userService = userService;
 		}
 
-		public bool Login (string username, string password)
+		public UserResponse Login (string username, string password)
 		{
 			return _userService.Login (username, password);
 		}

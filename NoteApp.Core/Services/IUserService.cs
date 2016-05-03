@@ -1,12 +1,13 @@
 ﻿using System;
+using NoteApp.Core.DTO;
 
 namespace NoteApp.Core.Services
 {
 	public interface IUserService
 	{
-		bool RegisterUser (string username, string password);
+		UserResponse RegisterUser (string username, string password);
 
-		bool Login (string username, string password);
+		UserResponse Login (string username, string password);
 
 	}
 }

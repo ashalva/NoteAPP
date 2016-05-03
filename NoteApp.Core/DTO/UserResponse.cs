@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace NoteApp.Core.DTO
 {
-	public class RegisterResponse : ResponseBase
+	public class UserResponse : ResponseBase
 	{
 		[JsonPropertyAttribute ("_id")]
 		public string UserId {

@@ -8,7 +8,7 @@ namespace NoteApp.Touch.Helpers
 		public static string UserId {
 			get { 
 				string value = NSUserDefaults.StandardUserDefaults.StringForKey (Constants.UserId); 
-				if (string.IsNullOrWhiteSpace (value))
+				if (!string.IsNullOrWhiteSpace (value))
 					return value;
 				else
 					return string.Empty;
