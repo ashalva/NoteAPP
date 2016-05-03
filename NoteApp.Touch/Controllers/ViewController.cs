@@ -58,7 +58,14 @@ namespace NoteApp.Touch
 					NavigationController.PushViewController (new AddNoteViewController (_viewModel), false);
 				})
 				, true);
-			
+
+			this.NavigationItem.SetLeftBarButtonItem (
+				new UIBarButtonItem ("Log out", UIBarButtonItemStyle.Plain, (sender, args) => {
+					UIApplication.SharedApplication.KeyWindow.RootViewController = new LoginViewController ();
+					Settings.UserId = string.Empty;
+				})
+				, true);
+
 			_refresher = new UIRefreshControl ();
 			_refresher.ValueChanged += Refresh;
 
