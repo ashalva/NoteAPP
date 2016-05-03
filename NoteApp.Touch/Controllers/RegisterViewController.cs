@@ -1,48 +1,43 @@
 ﻿using System;
 using UIKit;
-using CoreGraphics;
+using NoteApp.Touch.Helpers;
 using NoteApp.Core.ViewModels;
 using Autofac;
+using CoreGraphics;
 using System.Threading.Tasks;
-using NoteApp.Touch.Helpers;
 
 namespace NoteApp.Touch.Controllers
 {
-	public class LoginViewController : BaseViewController
+	public class RegisterViewController : UIViewController
 	{
-		private LoginViewModel _viewModel;
+		private RegisterViewModel _viewModel;
 		private UITextField _userName;
 		private UITextField _password;
+		private UITextField _confirmPassword;
 
-		public LoginViewController () : base ()
+		public RegisterViewController () : base ()
 		{
 			using (var scope = App.Container.BeginLifetimeScope ()) {
-				_viewModel = scope.Resolve<LoginViewModel> ();
+				_viewModel = scope.Resolve<RegisterViewModel> ();
 			}
 		}
 
 		public override void ViewDidLoad ()
 		{
 			base.ViewDidLoad ();
-			NavigationController.NavigationBar.Translucent = false;
-			Title = "Login";
+
 			View.BackgroundColor = UIColor.White;
+			Title = "Register";
 			InitUI ();
 		}
 
 		private void InitUI ()
 		{
-			this.NavigationItem.SetRightBarButtonItem (
-				new UIBarButtonItem ("Register", UIBarButtonItemStyle.Plain, (sender, args) => {
-					NavigationController.PushViewController (new RegisterViewController (), false);
-				})
-				, true);
-			
 			nfloat PADDING = 10f;
 			nfloat TEXTVIEW_HEIGHT = 40;
 
 			_userName = new UITextField ();
-			_userName.Frame = new CGRect (PADDING, View.Frame.Height / 3, View.Frame.Width - PADDING * 2, TEXTVIEW_HEIGHT);
+			_userName.Frame = new CGRect (PADDING, 20, View.Frame.Width - PADDING * 2, TEXTVIEW_HEIGHT);
 			_userName.Placeholder = "Username";
 			_userName.TextAlignment = UITextAlignment.Center;
 			_userName.Layer.BorderWidth = 0.5f;
@@ -56,27 +51,36 @@ namespace NoteApp.Touch.Controllers
 			_password.Layer.BorderWidth = 0.5f;
 			_password.Layer.BorderColor = UIColor.LightGray.CGColor;
 
-			UIButton loginButton = new UIButton (UIButtonType.System);
-			loginButton.SetTitle ("Login", UIControlState.Normal);
-			loginButton.Frame = new CGRect (PADDING, _password.Frame.Bottom + 5f, View.Frame.Width - PADDING * 2, TEXTVIEW_HEIGHT);
-			loginButton.Layer.BorderWidth = 0.5f;
-			loginButton.Layer.BorderColor = UIColor.LightGray.CGColor;
-			loginButton.TouchUpInside += LoginClicked;
+			_confirmPassword = new UITextField ();
+			_confirmPassword.Frame = new CGRect (PADDING, _password.Frame.Bottom + 5f, View.Frame.Width - PADDING * 2, TEXTVIEW_HEIGHT);
+			_confirmPassword.Placeholder = "Confirm Password";
+			_confirmPassword.SecureTextEntry = true;
+			_confirmPassword.TextAlignment = UITextAlignment.Center;
+			_confirmPassword.Layer.BorderWidth = 0.5f;
+			_confirmPassword.Layer.BorderColor = UIColor.LightGray.CGColor;
+
+			UIButton registerButton = new UIButton (UIButtonType.System);
+			registerButton.SetTitle ("Login", UIControlState.Normal);
+			registerButton.Frame = new CGRect (PADDING, _confirmPassword.Frame.Bottom + 5f, View.Frame.Width - PADDING * 2, TEXTVIEW_HEIGHT);
+			registerButton.Layer.BorderWidth = 0.5f;
+			registerButton.Layer.BorderColor = UIColor.LightGray.CGColor;
+			registerButton.TouchUpInside += RegisterClicked;
 
 			View.AddSubview (_userName);
 			View.AddSubview (_password);
-			View.AddSubview (loginButton);
+			View.AddSubview (_confirmPassword);
+			View.AddSubview (registerButton);
 
 		}
 
-		void LoginClicked (object sender, EventArgs e)
+		void RegisterClicked (object sender, EventArgs e)
 		{
 			var dialog = DialogHelper.ShowProgressDialog (new CGRect (0, 0, View.Frame.Width, View.Frame.Height), View);
 			var username = _userName.Text;
 			var password = _password.Text;
-			if (!string.IsNullOrEmpty (_password.Text) && !string.IsNullOrEmpty (_userName.Text)) {
+			if (!string.IsNullOrEmpty (_password.Text) && !string.IsNullOrEmpty (_userName.Text) && _password.Text == _confirmPassword.Text) {
 				Task.Run (() => {
-					var result = _viewModel.Login (username, password);
+					var result = _viewModel.Register (username, password);
 					InvokeOnMainThread (() => {
 						DialogHelper.DismissProgressDialog (dialog);
 						if (result.Status == 200) {
@@ -84,6 +88,7 @@ namespace NoteApp.Touch.Controllers
 							UIApplication.SharedApplication.KeyWindow.RootViewController = new UINavigationController (new ViewController ());
 						} else {
 							_password.Text = string.Empty;
+							_confirmPassword.Text = string.Empty;
 							_userName.Text = string.Empty;
 						}
 					});

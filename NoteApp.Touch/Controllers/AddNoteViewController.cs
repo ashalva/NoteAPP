@@ -60,7 +60,7 @@ namespace NoteApp.Touch.Controllers
 						alertcontroller.AddAction (UIAlertAction.Create ("OK", UIAlertActionStyle.Default, null));
 						PresentViewController (alertcontroller, true, null);
 					} else {
-						_dialog = DialogHelper.ShowProgressDialog (View.Frame, View);
+						_dialog = DialogHelper.ShowProgressDialog (new CGRect (0, 0, View.Frame.Width, View.Frame.Height), View);
 						Addnote (nameTextField.Text, bodyTextField.Text);
 					}
 				})

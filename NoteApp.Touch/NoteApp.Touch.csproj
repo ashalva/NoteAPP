@@ -110,6 +110,7 @@
     <Compile Include="Controllers\LoginViewController.cs" />
     <Compile Include="Helpers\Settings.cs" />
     <Compile Include="Helpers\Constants.cs" />
+    <Compile Include="Controllers\RegisterViewController.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>

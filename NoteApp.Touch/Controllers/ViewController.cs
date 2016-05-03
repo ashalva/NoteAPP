@@ -32,7 +32,7 @@ namespace NoteApp.Touch
 		{
 			base.ViewDidLoad ();
 
-			_dialog = DialogHelper.ShowProgressDialog (View.Frame, View);
+			_dialog = DialogHelper.ShowProgressDialog (new CGRect (0, 0, View.Frame.Width, View.Frame.Height), View);
 
 			Title = "My Notes";
 			View.BackgroundColor = UIColor.White;
@@ -61,7 +61,7 @@ namespace NoteApp.Touch
 
 			this.NavigationItem.SetLeftBarButtonItem (
 				new UIBarButtonItem ("Log out", UIBarButtonItemStyle.Plain, (sender, args) => {
-					UIApplication.SharedApplication.KeyWindow.RootViewController = new LoginViewController ();
+					UIApplication.SharedApplication.KeyWindow.RootViewController = new UINavigationController (new LoginViewController ());
 					Settings.UserId = string.Empty;
 				})
 				, true);

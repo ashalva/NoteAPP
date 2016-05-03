@@ -27,7 +27,7 @@ namespace NoteApp.Touch
 			if (!string.IsNullOrEmpty (Settings.UserId)) {
 				startUpController = new UINavigationController (new ViewController ());
 			} else {
-				startUpController = new LoginViewController ();
+				startUpController = new UINavigationController (new LoginViewController ());
 			}
 
 			Window = new UIWindow (UIScreen.MainScreen.Bounds);
