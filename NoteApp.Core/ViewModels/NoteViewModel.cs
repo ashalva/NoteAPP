@@ -15,14 +15,14 @@ namespace NoteApp.Core.ViewModels
 			_noteServices = noteService;
 		}
 
-		public List<Note> GetNotes ()
+		public List<Note> GetNotes (string userId)
 		{
-			return _noteServices.GetNotes ();
+			return _noteServices.GetNotes (userId);
 		}
 
-		public bool AddNote (string name, string body)
+		public bool AddNote (string name, string body, string userId)
 		{
-			return _noteServices.AddNote (name, body);
+			return _noteServices.AddNote (name, body, userId);
 		}
 
 		public bool DeleteNote (string id)

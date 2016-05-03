@@ -93,7 +93,7 @@ namespace NoteApp.Touch
 			List<Note> notes = null;
 
 			await Task.Run (() => {
-				notes = _viewModel.GetNotes ();
+				notes = _viewModel.GetNotes (Settings.UserId);
 			});
 			_noteSource.SDSource = notes;
 			_notesTableView.Source = _noteSource;
@@ -104,7 +104,7 @@ namespace NoteApp.Touch
 		void Refresh (object sender, EventArgs e)
 		{
 			Task.Run (() => {
-				var notes = _viewModel.GetNotes ();
+				var notes = _viewModel.GetNotes (Settings.UserId);
 				InvokeOnMainThread (() => {
 					_noteSource.SDSource = notes;
 					_notesTableView.ReloadData ();

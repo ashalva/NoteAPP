@@ -6,9 +6,9 @@ namespace NoteApp.Core.Services
 {
 	public interface INoteService
 	{
-		List<Note> GetNotes ();
+		List<Note> GetNotes (string userId);
 
-		bool AddNote (string name, string body);
+		bool AddNote (string name, string body, string userId);
 
 		bool DeleteNote (string id);
 

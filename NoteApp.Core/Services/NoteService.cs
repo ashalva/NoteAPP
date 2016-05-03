@@ -15,9 +15,9 @@ namespace NoteApp.Core.Services
 			_apiProvider = apiProvider;
 		}
 
-		public List<Note> GetNotes ()
+		public List<Note> GetNotes (string userId)
 		{
-			string url = string.Format ("{0}getNotes", Constants.APIUrl);
+			string url = string.Format ("{0}getNotes?userId={1}", Constants.APIUrl, userId);
 			var result = _apiProvider.GET<List<Note>> (url, null);
 
 			if (result != null)
@@ -25,10 +25,10 @@ namespace NoteApp.Core.Services
 			return result;
 		}
 
-		public bool AddNote (string name, string body)
+		public bool AddNote (string name, string body, string userId)
 		{
-			string url = string.Format ("{0}addNote?name={1}&body={2}",
-				             Constants.APIUrl, name, body);
+			string url = string.Format ("{0}addNote?name={1}&body={2}&userId={3}",
+				             Constants.APIUrl, name, body, userId);
 			var result = _apiProvider.GET<StatusCode> (url, null);
 
 			if (result.Status == 200)

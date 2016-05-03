@@ -71,7 +71,7 @@ namespace NoteApp.Touch.Controllers
 		{
 			bool success = false;
 			await Task.Run (() => {
-				success = _viewModel.AddNote (name, body);
+				success = _viewModel.AddNote (name, body, Settings.UserId);
 			});
 			if (success) {
 				NavigationController.PopViewController (true);
