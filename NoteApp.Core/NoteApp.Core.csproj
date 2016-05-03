@@ -43,6 +43,8 @@
     <Compile Include="Services\UserService.cs" />
     <Compile Include="DTO\RegisterResponse.cs" />
     <Compile Include="DTO\ResponseBase.cs" />
+    <Compile Include="ViewModels\LoginViewModel.cs" />
+    <Compile Include="ViewModels\RegisterViewModel.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>

@@ -18,8 +18,11 @@ namespace NoteApp.Touch
 			builder.RegisterType<ApiProvider> ().As<IApiProvider> ();
 
 			builder.RegisterType<NoteService> ().As<INoteService> ();
+			builder.RegisterType<UserService> ().As<IUserService> ();
 
 			builder.RegisterType<NoteViewModel> ();
+			builder.RegisterType<LoginViewModel> ();
+			builder.RegisterType<RegisterViewModel> ();
 
 			App.Container = builder.Build ();
 		}

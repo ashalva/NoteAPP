@@ -1,6 +1,8 @@
 ﻿using Foundation;
 using UIKit;
 using System.Security.Principal;
+using NoteApp.Touch.Helpers;
+using NoteApp.Touch.Controllers;
 
 namespace NoteApp.Touch
 {
@@ -20,8 +22,16 @@ namespace NoteApp.Touch
 		{
 			App.Initialize ();
 
+			UIViewController startUpController = null;
+
+			if (!string.IsNullOrEmpty (Settings.UserId)) {
+				startUpController = new UINavigationController (new ViewController ());
+			} else {
+				startUpController = new LoginViewController ();
+			}
+
 			Window = new UIWindow (UIScreen.MainScreen.Bounds);
-			Window.RootViewController = new UINavigationController (new ViewController ());
+			Window.RootViewController = startUpController;
 			Window.MakeKeyAndVisible ();
 
 			return true;
