@@ -39,6 +39,10 @@
     <Compile Include="BusinessObjects\Note.cs" />
     <Compile Include="BusinessObjects\StatusCode.cs" />
     <Compile Include="ViewModels\NoteViewModel.cs" />
+    <Compile Include="Services\IUserService.cs" />
+    <Compile Include="Services\UserService.cs" />
+    <Compile Include="DTO\RegisterResponse.cs" />
+    <Compile Include="DTO\ResponseBase.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <ItemGroup>
@@ -47,6 +51,7 @@
     <Folder Include="Helpers\" />
     <Folder Include="Services\" />
     <Folder Include="ViewModels\" />
+    <Folder Include="DTO\" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json">
